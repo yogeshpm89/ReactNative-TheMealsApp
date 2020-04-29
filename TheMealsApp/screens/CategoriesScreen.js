@@ -1,22 +1,30 @@
 
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import CategoryGrid from '../components/CategoryGrid';
+import { StyleSheet } from 'react-native';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+import AppHeaderButton from '../components/AppHeaderButton';
+
 
 const CategoryScreen = props => {
-    render(
-        <View style={styles.screen}>
-            <Text>The categories screen</Text>
-        </View>
+    return (
+        <CategoryGrid {...props}></CategoryGrid>
     )
 }
 
-const styles = StyleSheet.create({
-    screen: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
+CategoryScreen.navigationOptions = (navData) => {
+    return {
+        headerTitle: "Meal Categories",
+        headerLeft: () => <HeaderButtons HeaderButtonComponent={AppHeaderButton}>
+            <Item title="Favorite"
+                iconName="ios-menu"
+                onPress={() => {
+                    navData.navigation.toggleDrawer()
+                }}></Item>
+        </HeaderButtons>
     }
-});
+};
 
+const styles = StyleSheet.create({});
 
 export default CategoryScreen;
